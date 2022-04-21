@@ -6,6 +6,12 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+
+# Do not upload secrets or keys!
+.secrets
+.infurakey
+,
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -102,3 +108,26 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Ignore node stuff
+node_modules/
+yarn-error.log
+
+# Ignore build stuff
+cache/
+build/
+dist/
+
+# Buidler cache
+cached/
+
+# Ignore solc bin output
+bin/
+
+# Others
+.env
+.DS_Store
+.vscode
+
+# Reports
+/reports

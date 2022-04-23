@@ -38,6 +38,12 @@ function getAccountMnemonic() {
 
 function getDefaultProviderURL(network: string) {
   return `https://${network}.infura.io/v3/${process.env.INFURA_KEY}`
+  //return `wss://${network}.infura.io/ws/v3/${process.env.INFURA_KEY}`
+
+}
+
+function getMainAccount(){
+  return process.env.MAIN_ACCOUNT || ''
 }
 
 function setupDefaultNetworkProviders(buidlerConfig) {
@@ -49,7 +55,9 @@ function setupDefaultNetworkProviders(buidlerConfig) {
       gasPrice: netConfig.gasPrice || 'auto',
       accounts: {
         mnemonic: getAccountMnemonic(),
+        //initialIndex: 1,
       },
+      from: getMainAccount(),
     }
   }
 }

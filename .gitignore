@@ -10,6 +10,7 @@ lerna-debug.log*
 # Do not upload secrets or keys!
 .secrets
 .infurakey
+.env
 ,
 
 # Diagnostic reports (https://nodejs.org/api/report.html)

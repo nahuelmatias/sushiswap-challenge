@@ -243,9 +243,9 @@ contract SushiWallet is Ownable {
     }
 
     //Encapsulate the calculation if pair exists.
-    function checkIfPairExists(address tokenA, address tokenB) public view onlyOwner returns (address pair) {
+    function checkIfPairExists(address tokenA, address tokenB) public view returns (address) {
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        pair = SushiSwapV2Factory(SushiSwapRouter(SushiRouterAddress).factory()).getPair(token0, token1);
+        return SushiSwapV2Factory(SushiSwapRouter(SushiRouterAddress).factory()).getPair(token0, token1);
     }
 
     //encapsulate the calculation of x*y=k if pair exists.
@@ -253,7 +253,7 @@ contract SushiWallet is Ownable {
         address token0,
         address token1,
         uint256 amount0
-    ) public view onlyOwner returns (uint256 token1Amount) {
+    ) public view returns (uint256 token1Amount) {
         //1st: locate pair, if exists. If it not exists, return 0.
         address pair = checkIfPairExists(token0, token1);
         if (pair == address(0)) {

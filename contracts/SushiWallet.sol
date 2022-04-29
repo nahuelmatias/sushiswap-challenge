@@ -135,6 +135,7 @@ abstract contract Ownable is Context {
 contract SushiWallet is Ownable {
     string public constant name = "SushiWallet";
     address SushiRouterAddress; //Addr for SushiSwap router: https://dev.sushi.com/sushiswap/contracts ( 0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506 )
+    address MasterChefV2Address; //Addr for MasterChef
 
     event Rescue(address tokenAddress, uint256 amount);
 
@@ -192,14 +193,23 @@ contract SushiWallet is Ownable {
     /// @return success the return variables of a contract’s function state variable
     function approveTokensForRouter(address erc20TokenAddress, uint256 amountApprovedToSpend)
         internal
-        onlyOwner
         returns (bool success)
     {
         //It should be something like:
         return IERC20(erc20TokenAddress).approve(SushiRouterAddress, amountApprovedToSpend);
     }
 
-    function approveTokensForMasterChef(address erc20TokenAddress) internal onlyOwner returns (uint256) {}
+    //TODO: This functions are only skeletons, please fill it with code
+    function approveTokensForMasterChef(address /*slpAddress*/, uint256 /*amount*/) internal pure returns (uint256) {
+        //This function should be approve the SLP tokens for the masterchef yield farming
+        //Pure added only to avoid warnings
+        return 0;
+    }
+    //TODO: This functions are only skeletons, please fill it with code
+    function makeYieldFarming(address /*slpAddress*/, uint256 /*amount*/) internal pure returns (uint256) {
+        //This function should call yield farming in MasterChef smart contract.
+        return 0;
+    }
 
     /// @notice provideLiquidity
     /// @dev Call Pool, compute 0,5% of slippage, and the timeout. Returns with the values of the pool
@@ -259,7 +269,7 @@ contract SushiWallet is Ownable {
         if (pair == address(0)) {
             return 0;
         }
-        (uint256 reserve0, uint256 reserve1, uint256 lastBlockTimestamp) = SushiSwapPair(pair).getReserves();
+        (uint256 reserve0, uint256 reserve1, /*uint256 lastBlockTimestamp*/) = SushiSwapPair(pair).getReserves();
         token1Amount = SushiSwapRouter(SushiRouterAddress).quote(amount0, reserve0, reserve1);
     }
 

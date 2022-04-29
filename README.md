@@ -26,13 +26,17 @@ First, edit _./scripts/deploy_in_testnet.ts_ with the address of SushiSwap in th
 > npx hardhat run --network kovan .\scripts\deploy_in_testnet.ts --verbose
 
 ### Verify
-> npx hardhat verify {ADDR_FROM_LAST_STEP} --network kovan  --verbose
+> npx hardhat verify {ADDR_FROM_LAST_STEP} 0x1b02da8cb0d097eb8d57a175b88c7d8b47997506 --network kovan  --verbose
 
 ### Usage
 With the Deployment Address, transfer the desired amount of two testnet tokens to the contract and call the function **_subscribeToPool_** in Etherscan.
 It will call _approve_ for the desired tokens (Please take note of the address of your tokens) and their amounts.
 Afterwards, it will call SushiSwap router for the desired pair, with a slippage of 0.5%.
 Lastly, it will approve SLP tokens for the contract.
+
+### tests
+To run tests: 
+> npx hardhat test --network kovan  --verbose
 
 **KNOWN LIMITATION**: 
 - At now, it will not put SLP tokens in Yield Farming. You can rescue the SLP tokens from the contract, and do it by yourself. Honestly, at the time being, I couldn't find the function in Sushi to do this in an automated way. (The prototype of the functions are now in the code, but does nothing. I think that is _deposit_ in MasterChef, but I'm not sure)

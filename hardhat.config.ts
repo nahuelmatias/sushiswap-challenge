@@ -42,7 +42,7 @@ function getDefaultProviderURL(network: string) {
 
 }
 
-function getMainAccount(){
+function getMainAccount() {
   return process.env.MAIN_ACCOUNT || ''
 }
 
@@ -78,6 +78,9 @@ const config: HardhatUserConfig = {
     sources: './contracts',
     tests: './test',
     artifacts: './build/contracts',
+  },
+  mocha: {
+    timeout: 400000
   },
   solidity: {
     compilers: [
